@@ -1,6 +1,7 @@
 package gachon.project.withus.domain.user;
 
 
+import gachon.project.withus.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,11 +10,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDate;
 
 @Getter
 @NoArgsConstructor
 @Entity
-public class User {
+public class User extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,22 +30,22 @@ public class User {
     // 생년월일 --> YYYY/MM/DD형식으로 넘겨줘서 split해서 년도로 나이계산
     private String birth;
 
-    // 나이(int로 넘겨줄지 String으로 넘겨줄지 백에서 계산할지에따라 달라짐)
+    // 나이(백에서 계산)
     private int age;
 
     // 사는 장소에 대한 정보 프론트에서 어떻게 넘겨주냐에따라 변경가능성이 있음(-------------------------------------------------------
-    private String locationX;
-    private String locationY;
+    private String lat;
+    private String lng;
 
-    private String addressName;
+    //장소 풀네임
+    private String addr;
 
     // 00시
     private String region1Depth;
     // 00구
     private String region2Depth;
 
-    // 장소이름
-    private String placeName;
+
     // ---------------------------------------------------------------)
 
     // 성별
@@ -55,23 +57,41 @@ public class User {
     // depressed Score로 우울증점수
     private int dpScore;
 
+    private String role;
 
+    private boolean deleteYn;
 
     @Builder
-    public User(String name,String email, String birth, int age, String locationX,String locationY,String addressName,
+    public User(String name,String email, String birth, String lat,String lng,String addr,
                 String region1Depth,String region2Depth,String placeName,String sex){
         this.name= name;
         this.email=email;
         this.birth = birth;
-        this.age= age;
-        this.locationX = locationX;
-        this.locationY = locationY;
-        this.addressName = addressName;
+
+        // 위치 정보
+        this.lat = lat;
+        this.lng = lng;
+        this.addr = addr;
         this.region1Depth = region1Depth;
         this.region2Depth = region2Depth;
-        this.placeName = placeName;
+
+
         this.sex = sex;
+
+        String[] birtharry = birth.split("/");
+        LocalDate now = LocalDate.now();
+        int nowYear = now.getYear();
+
+        // 나이계산
+        this.age= nowYear - Integer.parseInt(birtharry[0]);
+        System.out.println("day of Year: "+ nowYear);
+        System.out.println(birtharry[0]);
+        // 기본값 설정
         this.iot = false;
+        this.dpScore = 50;
+        // admin은 임의로 DB에서 바꿔주는거로
+        this.role = "Guest";
+        this.deleteYn = false;
 
     }
 
