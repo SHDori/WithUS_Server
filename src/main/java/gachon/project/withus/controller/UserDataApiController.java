@@ -61,6 +61,26 @@ public class UserDataApiController {
         return email;
     }
     // 5. 유저 iot 서비스 신청
+    @PutMapping("/api/user/registIot/{email}")
+    public String registIot(@PathVariable String email){
+        userService.registerIotService(email);
+        return email;
+    }
     // 6. 유저 우울증 점수 상승,하락
+    // 6-1. 유저 우울증 점수 상승
+    @PutMapping("/api/user/plus/{email}")
+    public String plusDpScore(@PathVariable String email){
+
+        userService.plusDpScore(email);
+        return email;
+    }
+
+    // 6-2. 유저 우울증 점수 하락
+    @PutMapping("/api/user/minus/{email}")
+    public String minusDpScore(@PathVariable String email){
+
+        userService.minusDpScore(email);
+        return email;
+    }
 
 }

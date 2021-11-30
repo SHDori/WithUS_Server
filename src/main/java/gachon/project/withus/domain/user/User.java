@@ -123,4 +123,19 @@ public class User extends BaseTimeEntity {
         this.deleteYn =true;
     }
 
+    public void registerIotService(){
+        this.iot =true;
+    }
+
+    public void plusDpScore(){
+        if(this.dpScore<90){
+            this.dpScore +=10;
+        }
+    }
+    public void minusDpScore(){
+        if(this.dpScore>10){
+            this.dpScore -=10;
+        }
+    }
+
 }

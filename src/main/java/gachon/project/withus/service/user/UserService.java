@@ -66,9 +66,27 @@ public class UserService {
     }
 
 
-
     // 5. 유저 iot 서비스 신청
+    @Transactional
+    public void registerIotService(String email){
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다. email = "+ email));
+        user.registerIotService();
+    }
     // 6. 유저 우울증 점수 상승,하락
+    @Transactional
+    public void plusDpScore(String email){
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다. email = "+ email));
+        user.plusDpScore();
+    }
+
+    @Transactional
+    public void minusDpScore(String email){
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다. email = "+ email));
+        user.minusDpScore();
+    }
 
 
 
