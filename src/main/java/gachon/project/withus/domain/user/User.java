@@ -33,7 +33,7 @@ public class User extends BaseTimeEntity {
     // 나이(백에서 계산)
     private int age;
 
-    // 사는 장소에 대한 정보 프론트에서 어떻게 넘겨주냐에따라 변경가능성이 있음(-------------------------------------------------------
+    // 사는 장소에 대한 정보 (-------------------------------------------------------
     private String lat;
     private String lng;
 
@@ -78,14 +78,14 @@ public class User extends BaseTimeEntity {
 
         this.sex = sex;
 
-        String[] birtharry = birth.split("/");
+        String[] birtharr = birth.split("/");
         LocalDate now = LocalDate.now();
         int nowYear = now.getYear();
 
         // 나이계산
-        this.age= nowYear - Integer.parseInt(birtharry[0]);
+        this.age= nowYear - Integer.parseInt(birtharr[0]);
         System.out.println("day of Year: "+ nowYear);
-        System.out.println(birtharry[0]);
+        System.out.println(birtharr[0]);
         // 기본값 설정
         this.iot = false;
         this.dpScore = 50;
@@ -93,6 +93,34 @@ public class User extends BaseTimeEntity {
         this.role = "Guest";
         this.deleteYn = false;
 
+    }
+
+    public void updateInfo(String name,String birth,String lat,String lng,String addr,
+                       String region1Depth,String region2Depth){
+        this.name = name;
+        this.birth = birth;
+
+        // 위치 정보
+        this.lat = lat;
+        this.lng = lng;
+        this.addr = addr;
+        this.region1Depth = region1Depth;
+        this.region2Depth = region2Depth;
+
+        String[] birtharr = birth.split("/");
+        LocalDate now = LocalDate.now();
+        int nowYear = now.getYear();
+
+        // 나이계산
+        this.age= nowYear - Integer.parseInt(birtharr[0]);
+        System.out.println("day of Year: "+ nowYear);
+        System.out.println(birtharr[0]);
+
+
+    }
+
+    public void delete(){
+        this.deleteYn =true;
     }
 
 }
