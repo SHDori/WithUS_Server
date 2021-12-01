@@ -10,6 +10,10 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
+    // 전체유저 Page로 반환
+    @Override
+    @Query("SELECT u FROM User u  where u.deleteYn = false")
+    Page<User> findAll(Pageable pageable);
 
     Optional<User> findByEmail(String email);
 

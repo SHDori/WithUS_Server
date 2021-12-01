@@ -63,7 +63,7 @@ public class User extends BaseTimeEntity {
 
     @Builder
     public User(String name,String email, String birth, String lat,String lng,String addr,
-                String region1Depth,String region2Depth,String placeName,String sex){
+                String region1Depth,String region2Depth,String sex){
         this.name= name;
         this.email=email;
         this.birth = birth;
@@ -84,8 +84,8 @@ public class User extends BaseTimeEntity {
 
         // 나이계산
         this.age= nowYear - Integer.parseInt(birtharr[0]);
-        System.out.println("day of Year: "+ nowYear);
-        System.out.println(birtharr[0]);
+//        System.out.println("day of Year: "+ nowYear);
+//        System.out.println(birtharr[0]);
         // 기본값 설정
         this.iot = false;
         this.dpScore = 50;

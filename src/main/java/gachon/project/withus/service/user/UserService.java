@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
  * 4. 유저정보 삭제
  * 5. 유저 iot 서비스 신청
  * 6. 유저 우울증 점수 상승,하락
+ * 7. 유저정보를 리스트,페이지로 반환
  * */
 
 @RequiredArgsConstructor
