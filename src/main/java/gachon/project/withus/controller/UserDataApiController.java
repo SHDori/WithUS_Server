@@ -7,6 +7,8 @@ import gachon.project.withus.controller.dto.UserUpdateRequestDTO;
 import gachon.project.withus.domain.user.UserRepository;
 import gachon.project.withus.service.user.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /*
@@ -29,8 +31,14 @@ public class UserDataApiController {
 
     // 1. 유저정보 저장
     @PostMapping("/api/user/save")
-    public Long save(@RequestBody UserSaveRequestDTO saveRequestDTO){
-        return userService.save(saveRequestDTO);
+    public ResponseEntity<String> save(@RequestBody UserSaveRequestDTO saveRequestDTO){
+        if(saveRequestDTO.getName()=="" || saveRequestDTO.getBirth() == "" || saveRequestDTO.getEmail() == ""){
+            return new ResponseEntity<>("check the name, email, birth",HttpStatus.BAD_REQUEST);
+        }
+        else{
+            userService.save(saveRequestDTO);
+            return new ResponseEntity<>("save " + saveRequestDTO.getEmail()+"'s infomation successfully",HttpStatus.OK);
+        }
     }
 
     // 2-1. 유저정보조회 (email로 찾기)
@@ -60,12 +68,14 @@ public class UserDataApiController {
         userService.deleteUserByEmail(email);
         return email;
     }
+
     // 5. 유저 iot 서비스 신청
     @PutMapping("/api/user/registIot/{email}")
     public String registIot(@PathVariable String email){
         userService.registerIotService(email);
         return email;
     }
+
     // 6. 유저 우울증 점수 상승,하락
     // 6-1. 유저 우울증 점수 상승
     @PutMapping("/api/user/plus/{email}")
