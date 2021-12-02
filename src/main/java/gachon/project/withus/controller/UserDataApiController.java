@@ -56,9 +56,16 @@ public class UserDataApiController {
 
     // 2-1. 유저정보조회 (email로 찾기)
     @GetMapping("/api/user/{email}")
-    public UserResponseDTO findByEmail(@PathVariable String email){
+    public ResponseEntity<String> findByEmail(@PathVariable String email){
         UserResponseDTO userResponseDTO = userService.findByEmail(email);
-        return userResponseDTO;
+        if(userResponseDTO.getName()=="" || userResponseDTO.getEmail() == ""
+                || userResponseDTO.getBirth() == "" || userResponseDTO.getSex() == ""){
+            return new ResponseEntity<>("check the"+email+ "'s name, email, birth, sex",HttpStatus.BAD_REQUEST);
+        }
+        else{
+            return new ResponseEntity<>(email+"-> this user filled infomation about name, email, birth, sex",HttpStatus.OK);
+        }
+
     }
 
     // 2-2. 유저정보조회 (idx로 찾기)
@@ -84,9 +91,17 @@ public class UserDataApiController {
 
     // 5. 유저 iot 서비스 신청
     @PutMapping("/api/user/registIot/{email}")
-    public String registIot(@PathVariable String email){
-        userService.registerIotService(email);
-        return email;
+    public ResponseEntity<String> registIot(@PathVariable String email){
+        UserResponseDTO userResponseDTO = userService.findByEmail(email);
+        if(userResponseDTO.getAddr()==""){
+            return new ResponseEntity<>("iot서비스를 이용하기위해서 주소정보를 입력해주세요.",HttpStatus.BAD_REQUEST);
+        }
+        else{
+            userService.registerIotService(email);
+            return new ResponseEntity<>("서비스가 성공적으로 신청되었습니다.",HttpStatus.OK);
+        }
+
+
     }
 
     // 6. 유저 우울증 점수 상승,하락

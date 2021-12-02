@@ -5,8 +5,8 @@ import gachon.project.withus.domain.user.User;
 import lombok.Getter;
 
 /*
-* 유저정보 조회시 보이는것
-* 개인정보인 생년월일 나이 사는위치는 보이지 않게 했습니다
+* 유저정보 조회시 보이는것(-> 유저의 필수값이 들어가있는지 검증)
+*
 * */
 
 @Getter
@@ -17,13 +17,23 @@ public class UserResponseDTO {
     // 이메일
     private String email;
 
+    private String birth;
+
+    private String sex;
+
     // iot서비스 신청여부
     private boolean iot;
+
+    private String addr;
+
 
     public UserResponseDTO(User user){
         this.name = user.getName();
         this.email = user.getEmail();
+        this.birth = user.getBirth();
+        this.sex = user.getSex();
         this.iot = user.isIot();
+        this.addr = user.getAddr();
     }
 
 }

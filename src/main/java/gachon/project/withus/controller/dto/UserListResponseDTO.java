@@ -10,9 +10,15 @@ public class UserListResponseDTO {
 
     private String email;
 
+    private String lat;
+
+    private String lng;
+
     private String addr;
 
     private int age;
+
+    private String sex;
 
     private int dpScore;
 
@@ -20,8 +26,11 @@ public class UserListResponseDTO {
 
         this.name = user.getName();
         this.email = user.getEmail();
+        this.lat = user.getLat();
+        this.lng = user.getLng();
         this.addr = user.getAddr();
         this.age = user.getAge();
+        this.sex = user.getSex();
         this.dpScore = user.getDpScore();
     }
 

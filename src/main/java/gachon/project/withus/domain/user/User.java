@@ -36,16 +36,12 @@ public class User extends BaseTimeEntity {
     // 사는 장소에 대한 정보 (-------------------------------------------------------
     private String lat;
     private String lng;
-
     //장소 풀네임
     private String addr;
-
     // 00시
     private String region1Depth;
     // 00구
     private String region2Depth;
-
-
     // ---------------------------------------------------------------)
 
     // 성별
@@ -56,9 +52,9 @@ public class User extends BaseTimeEntity {
 
     // depressed Score로 우울증점수
     private int dpScore;
-
+    // 역할 (guest, admin)
     private String role;
-
+    // 삭제여부
     private boolean deleteYn;
 
     @Builder
