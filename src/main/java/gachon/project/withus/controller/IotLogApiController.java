@@ -44,6 +44,8 @@ public class IotLogApiController {
     }
 
 
+    // local test용 더미데이터
+    /*
     @PostConstruct
     public void iotInitializing(){
         for(int i=0; i<24 ; i++) {
@@ -54,6 +56,8 @@ public class IotLogApiController {
             iotRepository.save(iot);
         }
     }
+
+     */
 
 
 }
