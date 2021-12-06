@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
  * 2. 유저정보 조회(email로 찾기, id로 찾기)
  * 3. 유저정보 수정
  * 4. 유저정보 삭제
- * 5. 유저 iot 서비스 신청
+ * 5. 유저 iot 서비스 신청,취소
  * 6. 유저 우울증 점수 상승,하락
  * 7. 유저정보를 리스트,페이지로 반환
  * */
@@ -67,13 +67,23 @@ public class UserService {
     }
 
 
-    // 5. 유저 iot 서비스 신청
+    // 5-1. 유저 iot 서비스 신청
     @Transactional
     public void registerIotService(String email){
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다. email = "+ email));
         user.registerIotService();
     }
+
+    // 5-2. 유저 iot 서비스 신청 취소
+    @Transactional
+    public void unregisterIotService(String email){
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다. email = "+ email));
+        user.unregisterIotService();
+    }
+
+
     // 6. 유저 우울증 점수 상승,하락
     @Transactional
     public void plusDpScore(String email){

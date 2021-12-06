@@ -35,6 +35,15 @@ public class IotLogApiController {
                 .map(IotLogResponseDTO::new)
                 .collect(Collectors.toList());
     }
+    // 3. 특정유저 특정 날짜 특정시간 조회
+    @GetMapping("/api/iot/detail/{email}/{date}/{hour}/{location}")
+    public IotLogResponseDTO findDetailLog(@PathVariable String email,@PathVariable String date
+            , @PathVariable String hour,@PathVariable String location){
+        return iotService.findDetail(email,date,hour,location);
+
+    }
+
+
     @PostConstruct
     public void iotInitializing(){
         for(int i=0; i<24 ; i++) {
@@ -45,5 +54,6 @@ public class IotLogApiController {
             iotRepository.save(iot);
         }
     }
+
 
 }

@@ -115,19 +115,27 @@ public class User extends BaseTimeEntity {
 
     }
 
+    // 유저정보 삭제
     public void delete(){
         this.deleteYn =true;
     }
 
+    // iot 신청
     public void registerIotService(){
         this.iot =true;
     }
+    // iot 신청취소
+    public void unregisterIotService(){
+        this.iot =false;
+    }
 
+    // 우울증 점수 상승
     public void plusDpScore(){
         if(this.dpScore<90){
             this.dpScore +=10;
         }
     }
+    // 우울증 점수 하락
     public void minusDpScore(){
         if(this.dpScore>10){
             this.dpScore -=10;

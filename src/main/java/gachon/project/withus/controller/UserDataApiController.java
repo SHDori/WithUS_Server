@@ -103,6 +103,20 @@ public class UserDataApiController {
 
 
     }
+    // 5-2. 유저 iot 서비스 신청취소
+    @PutMapping("/api/user/unregistIot/{email}")
+    public ResponseEntity<String> unregistIot(@PathVariable String email){
+        UserResponseDTO userResponseDTO = userService.findByEmail(email);
+        if(!userResponseDTO.isIot()){
+            return new ResponseEntity<>("아직 신청하지 않은 유저입니다",HttpStatus.OK);
+        }
+        else{
+            userService.unregisterIotService(email);
+            return new ResponseEntity<>("서비스가 성공적으로 취소되었습니다.",HttpStatus.OK);
+        }
+
+
+    }
 
     // 6. 유저 우울증 점수 상승,하락
     // 6-1. 유저 우울증 점수 상승
@@ -179,6 +193,8 @@ public class UserDataApiController {
         }
 
     }
+
+
 
 
 }
