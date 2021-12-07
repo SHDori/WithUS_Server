@@ -23,6 +23,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT u FROM User u WHERE u.email = ?1")
     User findByUserEmail(String email);
 
+    @Query("SELECT u FROM User u WHERE u.email = ?1")
+    List<User> findByUserEmailForCheck(String email);
+
     // iot 서비스 신청유저들 list로 뿌려줌 (지도에는 전체유저를 뿌려야하니까 list로)
     @Query("SELECT u FROM User u where u.iot = true AND u.deleteYn = false")
     List<User> findByIot();

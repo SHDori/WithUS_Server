@@ -44,13 +44,17 @@ public class UserDataApiController {
     // 1. 유저정보 저장
     @PostMapping("/api/user/save")
     public ResponseEntity<String> save(@RequestBody UserSaveRequestDTO saveRequestDTO){
-        if(saveRequestDTO.getName()=="" || saveRequestDTO.getBirth() == ""
-                || saveRequestDTO.getEmail() == "" || saveRequestDTO.getSex() ==""){
-            return new ResponseEntity<>("check the name, email, birth",HttpStatus.BAD_REQUEST);
+        if(userRepository.findByUserEmailForCheck(saveRequestDTO.getEmail()).isEmpty()) {
+            if (saveRequestDTO.getName() == "" || saveRequestDTO.getBirth() == ""
+                    || saveRequestDTO.getEmail() == "" || saveRequestDTO.getSex() == "") {
+                return new ResponseEntity<>("check the name, email, birth", HttpStatus.BAD_REQUEST);
+            } else {
+                userService.save(saveRequestDTO);
+                return new ResponseEntity<>("save " + saveRequestDTO.getEmail() + "'s infomation successfully", HttpStatus.OK);
+            }
         }
         else{
-            userService.save(saveRequestDTO);
-            return new ResponseEntity<>("save " + saveRequestDTO.getEmail()+"'s infomation successfully",HttpStatus.OK);
+            return new ResponseEntity<>(saveRequestDTO.getEmail() + " welcome!", HttpStatus.OK);
         }
     }
 
