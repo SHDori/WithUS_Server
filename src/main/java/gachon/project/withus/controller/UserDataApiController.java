@@ -175,6 +175,7 @@ public class UserDataApiController {
 
 
     // local test용 더미데이터
+
     /*
     @PostConstruct
     public void initializing(){
@@ -194,7 +195,9 @@ public class UserDataApiController {
             userRepository.save(user);
         }
     }
+
      */
+
 
 
 
