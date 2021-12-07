@@ -9,6 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RequiredArgsConstructor
 @Service
 public class IotService {
@@ -22,10 +25,11 @@ public class IotService {
         return iotRepository.save(saveRequestDTO.toEntity()).getIdx();
     }
 
-    public IotLogResponseDTO findDetail(String email,String date,String hour,String location){
-        Iot iot = iotRepository.findDetailIotLog(email,date,hour,location)
-                .orElseThrow(()-> new IllegalArgumentException("해당 기록이 없습니다. email = "+email+" date = "+date+" hour = "+hour+" location = "+location));
-        return new IotLogResponseDTO(iot);
+    public List<IotLogResponseDTO> findDetailByTime(String date, String hour){
+        return iotRepository.findDetailIotLog(date,hour).stream()
+                .map(IotLogResponseDTO::new)
+                .collect(Collectors.toList());
+
     }
 
 

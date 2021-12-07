@@ -35,11 +35,10 @@ public class IotLogApiController {
                 .map(IotLogResponseDTO::new)
                 .collect(Collectors.toList());
     }
-    // 3. 특정유저 특정 날짜 특정시간 조회
-    @GetMapping("/api/iot/detail/{email}/{date}/{hour}/{location}")
-    public IotLogResponseDTO findDetailLog(@PathVariable String email,@PathVariable String date
-            , @PathVariable String hour,@PathVariable String location){
-        return iotService.findDetail(email,date,hour,location);
+    // 3. 특정 날짜 특정시간 기록조회
+    @GetMapping("/api/iot/detail/{date}/{hour}")
+    public List<IotLogResponseDTO> findDetailLog(@PathVariable String date, @PathVariable String hour){
+        return iotService.findDetailByTime(date,hour);
 
     }
 
@@ -55,9 +54,29 @@ public class IotLogApiController {
                     .build();
             iotRepository.save(iot);
         }
+
+        for(int i=0; i<24 ; i++) {
+            Iot iot = Iot.builder()
+                    .email("vw0527@naver.com").date("2021-12-04")
+                    .hour(""+i).location("entrance").count(""+i)
+                    .build();
+            iotRepository.save(iot);
+        }
+
+        for(int i=0; i<24 ; i++) {
+            Iot iot = Iot.builder()
+                    .email("test@naver.com").date("2021-12-04")
+                    .hour(""+i).location("entrance").count(""+i)
+                    .build();
+            iotRepository.save(iot);
+        }
     }
 
      */
+
+
+
+
 
 
 }
