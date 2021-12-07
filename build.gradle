@@ -33,6 +33,9 @@ dependencies {
 	// h2 로컬 DB
 	runtimeOnly 'com.h2database:h2'
 
+	// 서버에서 쓰기위한 maria DB
+	implementation 'org.mariadb.jdbc:mariadb-java-client'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 }
