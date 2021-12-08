@@ -22,6 +22,8 @@ public class UserListResponseDTO {
 
     private int dpScore;
 
+    private boolean siren;
+
     public UserListResponseDTO(User user){
 
         this.name = user.getName();
@@ -32,6 +34,7 @@ public class UserListResponseDTO {
         this.age = user.getAge();
         this.sex = user.getSex();
         this.dpScore = user.getDpScore();
+        this.siren = user.isSiren();
     }
 
 
