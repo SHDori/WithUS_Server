@@ -57,6 +57,8 @@ public class User extends BaseTimeEntity {
     // 삭제여부
     private boolean deleteYn;
 
+    private boolean siren;
+
     @Builder
     public User(String name,String email, String birth, String lat,String lng,String addr,
                 String region1Depth,String region2Depth,String sex){
@@ -88,6 +90,7 @@ public class User extends BaseTimeEntity {
         // admin은 임의로 DB에서 바꿔주는거로
         this.role = "Guest";
         this.deleteYn = false;
+        this.siren = false;
 
     }
 
