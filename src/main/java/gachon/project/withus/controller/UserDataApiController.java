@@ -43,9 +43,15 @@ public class UserDataApiController {
 
     // 1. 유저정보 저장
     @PostMapping("/api/user/save")
-    public Long save(@RequestBody UserSaveRequestDTO saveRequestDTO){
+    public  ResponseEntity<String> save(@RequestBody UserSaveRequestDTO saveRequestDTO){
 
-        return userService.save(saveRequestDTO);
+        if(userRepository.findByUserEmailForCheck(saveRequestDTO.getEmail()).isEmpty()) {
+            userService.save(saveRequestDTO);
+            return new ResponseEntity<>("save " + saveRequestDTO.getEmail() + "'s infomation successfully", HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<>(saveRequestDTO.getEmail() + " welcome!", HttpStatus.OK);
+        }
 
     }
 

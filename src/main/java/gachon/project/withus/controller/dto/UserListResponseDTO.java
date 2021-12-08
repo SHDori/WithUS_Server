@@ -6,15 +6,21 @@ import lombok.Getter;
 @Getter
 public class UserListResponseDTO {
 
+    private Long idx;
+
     private String name;
 
     private String email;
+
+
 
     private String lat;
 
     private String lng;
 
     private String addr;
+
+    private String birth;
 
     private int age;
 
@@ -26,11 +32,13 @@ public class UserListResponseDTO {
 
     public UserListResponseDTO(User user){
 
+        this.idx = user.getIdx();
         this.name = user.getName();
         this.email = user.getEmail();
         this.lat = user.getLat();
         this.lng = user.getLng();
         this.addr = user.getAddr();
+        this.birth = user.getBirth();
         this.age = user.getAge();
         this.sex = user.getSex();
         this.dpScore = user.getDpScore();
