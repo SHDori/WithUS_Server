@@ -84,7 +84,6 @@ public class UserDataApiController {
         else{
             return new ResponseEntity<>(email+"-> this user filled infomation about name, email, birth, sex",HttpStatus.OK);
         }
-
     }
 
     // 2-2. 유저정보조회 (idx로 찾기)
@@ -92,6 +91,18 @@ public class UserDataApiController {
     public UserResponseDTO findByIdx(@PathVariable Long idx){
         UserResponseDTO userResponseDTO = userService.findByIdx(idx);
         return userResponseDTO;
+    }
+
+    // 2-3. 유저 관리자인지 체크
+    @GetMapping("/api/user/role/{email}")
+    public boolean checkRole(@PathVariable String email){
+        UserResponseDTO userResponseDTO = userService.findByEmail(email);
+        if(userResponseDTO.getRole() =="admin" || userResponseDTO.getRole() =="Admin" || userResponseDTO.getRole() =="ADMIN"){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     // 3. 유저정보 수정

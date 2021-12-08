@@ -24,6 +24,8 @@ public class UserResponseDTO {
     // iot서비스 신청여부
     private boolean iot;
 
+    private String role;
+
     private String addr;
 
 
@@ -34,6 +36,7 @@ public class UserResponseDTO {
         this.sex = user.getSex();
         this.iot = user.isIot();
         this.addr = user.getAddr();
+        this.role = user.getRole();
     }
 
 }
