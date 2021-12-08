@@ -176,7 +176,21 @@ public class UserDataApiController {
 
         return userPagingList;
     }
+    // 8. iot 유저 이상감지
+    @PutMapping("/api/admin/iot/onsiren/{email}")
+    public String onSiren(@PathVariable String email){
 
+        userService.onSiren(email);
+        return email;
+    }
+
+    // 이상감지 off
+    @PutMapping("/api/admin/iot/offsiren/{email}")
+    public String offSiren(@PathVariable String email){
+
+        userService.offSiren(email);
+        return email;
+    }
 
     // local test용 더미데이터
 

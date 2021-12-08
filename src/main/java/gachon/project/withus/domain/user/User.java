@@ -132,6 +132,10 @@ public class User extends BaseTimeEntity {
         this.iot =false;
     }
 
+    public void onSiren(){this.siren = true;}
+
+    public void offSiren(){this.siren = false;}
+
     // 우울증 점수 상승
     public void plusDpScore(){
         if(this.dpScore<90){

@@ -99,6 +99,21 @@ public class UserService {
         user.minusDpScore();
     }
 
+    // 8. 유저 비상 on off
+    @Transactional
+    public void onSiren(String email){
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다. email = "+ email));
+        user.onSiren();
+    }
+
+    @Transactional
+    public void offSiren(String email){
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다. email = "+ email));
+        user.offSiren();
+    }
+
 
 
 }
