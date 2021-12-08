@@ -18,6 +18,11 @@ repositories {
 	mavenCentral()
 }
 
+
+manifest {
+	attributes 'Main-Class' : 'gachon.project.withus.WithusApplication'
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
