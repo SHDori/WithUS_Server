@@ -97,7 +97,7 @@ public class UserDataApiController {
     @GetMapping("/api/user/role/{email}")
     public boolean checkRole(@PathVariable String email){
         UserResponseDTO userResponseDTO = userService.findByEmail(email);
-        if(userResponseDTO.getRole() =="admin" || userResponseDTO.getRole() =="Admin" || userResponseDTO.getRole() =="ADMIN"){
+        if(userResponseDTO.getRole().equals("admin") || userResponseDTO.getRole().equals("Admin") || userResponseDTO.getRole().equals("ADMIN")){
             return true;
         }
         else {
