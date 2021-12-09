@@ -78,10 +78,13 @@ public class UserDataApiController {
     public ResponseEntity<String> findByEmail(@PathVariable String email){
         UserResponseDTO userResponseDTO = userService.findByEmail(email);
         if(userResponseDTO.getName()=="" || userResponseDTO.getEmail() == ""
-                || userResponseDTO.getBirth() == "" || userResponseDTO.getSex() == ""){
+                || userResponseDTO.getBirth() == "" || userResponseDTO.getSex() == ""
+                || userResponseDTO.getName().isEmpty() ||userResponseDTO.getEmail().isEmpty()
+                || userResponseDTO.getBirth().isEmpty() || userResponseDTO.getSex().isEmpty()){
             return new ResponseEntity<>("check the"+email+ "'s name, email, birth, sex",HttpStatus.BAD_REQUEST);
         }
         else{
+            System.out.println(userResponseDTO.getName());
             return new ResponseEntity<>(email+"-> this user filled infomation about name, email, birth, sex",HttpStatus.OK);
         }
     }
