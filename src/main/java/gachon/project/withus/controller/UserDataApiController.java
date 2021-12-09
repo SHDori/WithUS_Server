@@ -96,6 +96,13 @@ public class UserDataApiController {
         return userResponseDTO;
     }
 
+    // 2-2. 유저정보조회 (idx로 찾기)
+    @GetMapping("/api/user/fbe/{email}")
+    public UserResponseDTO findByEmailforUserInfo(@PathVariable String email){
+        UserResponseDTO userResponseDTO = userService.findByEmail(email);
+        return userResponseDTO;
+    }
+
     // 2-3. 유저 관리자인지 체크
     @GetMapping("/api/user/role/{email}")
     public boolean checkRole(@PathVariable String email){
