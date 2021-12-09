@@ -33,9 +33,11 @@ public class UserUpdateRequestDTO {
     // 00구
     private String region2Depth;
 
+    private String sex;
+
     @Builder
     public UserUpdateRequestDTO(String name,String birth,String lat,String lng,String addr,
-                              String region1Depth,String region2Depth){
+                              String region1Depth,String region2Depth,String sex){
         this.name= name;
         this.birth = birth;
         this.lat = lat;
@@ -43,6 +45,7 @@ public class UserUpdateRequestDTO {
         this.addr = addr;
         this.region1Depth = region1Depth;
         this.region2Depth = region2Depth;
+        this.sex = sex;
 
     }
 

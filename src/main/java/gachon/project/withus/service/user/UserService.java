@@ -54,7 +54,7 @@ public class UserService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다. email = "+ email));
 
         user.updateInfo(updateDTO.getName(),updateDTO.getBirth(), updateDTO.getLat(),
-                updateDTO.getLng(),updateDTO.getAddr(),updateDTO.getRegion1Depth(),updateDTO.getRegion2Depth());
+                updateDTO.getLng(),updateDTO.getAddr(),updateDTO.getRegion1Depth(),updateDTO.getRegion2Depth(),updateDTO.getSex());
         return email;
     }
 
