@@ -28,6 +28,8 @@ public class UserListResponseDTO {
 
     private int dpScore;
 
+    private Boolean iot;
+
     private boolean siren;
 
     public UserListResponseDTO(User user){
@@ -42,6 +44,7 @@ public class UserListResponseDTO {
         this.age = user.getAge();
         this.sex = user.getSex();
         this.dpScore = user.getDpScore();
+        this.iot= user.isIot();
         this.siren = user.isSiren();
     }
 
