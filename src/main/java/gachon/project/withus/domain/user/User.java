@@ -128,6 +128,16 @@ public class User extends BaseTimeEntity {
 
     }
 
+    public void updateAddr(String lat,String lng,String addr,
+                           String region1Depth,String region2Depth){
+        // 위치 정보
+        this.lat = lat;
+        this.lng = lng;
+        this.addr = addr;
+        this.region1Depth = region1Depth;
+        this.region2Depth = region2Depth;
+    }
+
     // 유저정보 삭제
     public void delete(){
         this.deleteYn =true;

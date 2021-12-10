@@ -1,10 +1,7 @@
 package gachon.project.withus.controller;
 
 
-import gachon.project.withus.controller.dto.UserListResponseDTO;
-import gachon.project.withus.controller.dto.UserResponseDTO;
-import gachon.project.withus.controller.dto.UserSaveRequestDTO;
-import gachon.project.withus.controller.dto.UserUpdateRequestDTO;
+import gachon.project.withus.controller.dto.*;
 import gachon.project.withus.domain.user.User;
 import gachon.project.withus.domain.user.UserRepository;
 import gachon.project.withus.service.user.UserService;
@@ -24,8 +21,8 @@ import java.util.stream.Collectors;
 /*
 * 유저 Data에 대한 기능 api를 정의한 곳입니다.
 * 1. 유저정보 저장
-* 2. 유저정보 조회(email로 찾기, id로 찾기)
-* 3. 유저정보 수정
+* 2. 유저정보 조회(email로 찾기, id로 찾기),필수값체크
+* 3. 유저정보 수정(전부,주소만)
 * 4. 유저정보 삭제
 * 5. 유저 iot 서비스 신청
 * 6. 유저 우울증 점수 상승,하락
@@ -73,7 +70,7 @@ public class UserDataApiController {
 //        }
 //    }
 
-    // 2-1. 유저정보조회 (email로 찾기)
+    // 2-1. 유저정보필수값 체크 (email로 찾기)
     @GetMapping("/api/user/{email}")
     public ResponseEntity<String> findByEmail(@PathVariable String email){
         UserResponseDTO userResponseDTO = userService.findByEmail(email);
@@ -96,14 +93,14 @@ public class UserDataApiController {
         return userResponseDTO;
     }
 
-    // 2-2. 유저정보조회 (idx로 찾기)
+    // 2-3. 유저정보조회 (email로 찾기)
     @GetMapping("/api/user/fbe/{email}")
     public UserResponseDTO findByEmailforUserInfo(@PathVariable String email){
         UserResponseDTO userResponseDTO = userService.findByEmail(email);
         return userResponseDTO;
     }
 
-    // 2-3. 유저 관리자인지 체크
+    // 2-4. 유저 관리자인지 체크
     @GetMapping("/api/user/role/{email}")
     public boolean checkRole(@PathVariable String email){
         UserResponseDTO userResponseDTO = userService.findByEmail(email);
@@ -115,11 +112,18 @@ public class UserDataApiController {
         }
     }
 
-    // 3. 유저정보 수정
+    // 3-1. 유저정보 수정
     @PutMapping("/api/user/update/{email}")
     public String updateUserInfo(@PathVariable String email, @RequestBody UserUpdateRequestDTO updateDTO){
 
         return userService.updateByEmail(email,updateDTO);
+    }
+
+    // 3-2. 유저주소정보만 수정
+    @PutMapping("/api/user/update/addr/{email}")
+    public String updateUserAddrInfo(@PathVariable String email, @RequestBody UserAddressUpdateDTO addrUpdateDTO){
+
+        return userService.updateAddressInfo(email,addrUpdateDTO);
     }
 
     // 4. 유저정보 삭제

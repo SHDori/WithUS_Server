@@ -1,6 +1,7 @@
 package gachon.project.withus.service.user;
 
 
+import gachon.project.withus.controller.dto.UserAddressUpdateDTO;
 import gachon.project.withus.controller.dto.UserResponseDTO;
 import gachon.project.withus.controller.dto.UserSaveRequestDTO;
 import gachon.project.withus.controller.dto.UserUpdateRequestDTO;
@@ -47,7 +48,7 @@ public class UserService {
         return new UserResponseDTO(user);
     }
 
-    // 3. 유저정보 수정
+    // 3-1. 유저정보 수정
     @Transactional
     public String updateByEmail(String email, UserUpdateRequestDTO updateDTO){
         User user = userRepository.findByEmail(email)
@@ -55,6 +56,17 @@ public class UserService {
 
         user.updateInfo(updateDTO.getName(),updateDTO.getBirth(), updateDTO.getLat(),
                 updateDTO.getLng(),updateDTO.getAddr(),updateDTO.getRegion1Depth(),updateDTO.getRegion2Depth(),updateDTO.getSex());
+        return email;
+    }
+
+    // 3-2. 유저정보 수정
+    @Transactional
+    public String updateAddressInfo(String email, UserAddressUpdateDTO addressUpdateDTO){
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다. email = "+ email));
+
+        user.updateAddr(addressUpdateDTO.getLat(),addressUpdateDTO.getLng(),addressUpdateDTO.getAddr()
+                ,addressUpdateDTO.getRegion1Depth(),addressUpdateDTO.getRegion2Depth());
         return email;
     }
 
