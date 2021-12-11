@@ -179,6 +179,14 @@ public class UserDataApiController {
         return email;
     }
 
+    // 6-3. 유저 우울증 점수 초기화
+    @PutMapping("/api/user/dpinit/{email}")
+    public String initDpScore(@PathVariable String email){
+
+        userService.initDpScore(email);
+        return email;
+    }
+
     /* 7. 유저정보 조회 in 관리자 페이지
         7-1. iot신청유저 조회(list) (지도에 뿌리기 위함)
         7-2. iot신청유저 조회(page) 리스트로 쭈욱 보기위함

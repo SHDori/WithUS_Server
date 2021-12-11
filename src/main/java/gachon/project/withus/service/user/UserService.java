@@ -111,6 +111,13 @@ public class UserService {
         user.minusDpScore();
     }
 
+    @Transactional
+    public void initDpScore(String email){
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다. email = "+ email));
+        user.initDpScore();
+    }
+
     // 8. 유저 비상 on off
     @Transactional
     public void onSiren(String email){

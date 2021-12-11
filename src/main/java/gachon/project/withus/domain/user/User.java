@@ -169,4 +169,8 @@ public class User extends BaseTimeEntity {
         }
     }
 
+    public void initDpScore(){
+        this.dpScore = 50;
+    }
+
 }
