@@ -30,6 +30,8 @@ public class UserResponseDTO {
 
     private String addr;
 
+    private int dpScore;
+
 
     public UserResponseDTO(User user){
         this.name = user.getName();
@@ -40,6 +42,7 @@ public class UserResponseDTO {
         this.siren = user.isSiren();
         this.addr = user.getAddr();
         this.role = user.getRole();
+        this.dpScore = user.getDpScore();
     }
 
 }
